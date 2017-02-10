@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.AbstractAction;
@@ -60,11 +61,16 @@ public class TableauSwing {
         JTextField idTextField = new JTextField("id");
         JTextField nomTextField = new JTextField("nom");
         
-        JButton bouton = new JButton(new AbstractAction("+") {
-            public void actionPerformed(ActionEvent e) {
+        JButton bouton = new JButton("+");
+        bouton.addActionListener(new ActionListener(){
+          public void actionPerformed(ActionEvent e) {
                 sourceDonneesPannes.add(new Long(idTextField.getText()), nomTextField.getText());
-            }
+            }  
         });
+        
+        
+                
+                
         
         // Mettre les champs dans le container
         
