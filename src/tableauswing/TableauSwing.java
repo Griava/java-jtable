@@ -40,7 +40,7 @@ public class TableauSwing {
         Container containerPrincipalFenetre = fenetre.getContentPane();
         fenetre.setSize(400, 400);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setVisible(true);
+
         
         // Tableau à partir de la source de données de pannes :
         
@@ -72,7 +72,7 @@ public class TableauSwing {
         // Ajouter le container ci-dessous :        
         
         containerPrincipalFenetre.add(footer, BorderLayout.SOUTH);
- 
+        fenetre.setVisible(true);
         
         
         
