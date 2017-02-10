@@ -95,7 +95,7 @@ public class TableauSwing {
         sourceDonneesPannes.loadFromCode();        
         sourceDonneesPannes.loadFromCSV();
         
-
+        sourceDonneesPannes.PrintAsXML();
 
     }
 

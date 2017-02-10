@@ -10,18 +10,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -71,9 +77,45 @@ public class CatalogueDePannes extends AbstractTableModel{
                 )
             );
         }
-        fireTableDataChanged();
         
+        
+        
+        fireTableDataChanged();
+               
     }
+    
+    
+    public void PrintAsXML() throws Exception{
+        
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document document = db.newDocument();
+        
+        
+        Element e  = document.createElement("pannes");
+               
+        document.appendChild(e);
+        
+        
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Transformer transformer = tFactory.newTransformer();
+
+        DOMSource source = new DOMSource(document);
+        
+        StringWriter stringWriter = new StringWriter();
+        StreamResult result = new StreamResult( stringWriter );
+        transformer.transform(source, result);
+        
+        StringBuffer sb = stringWriter.getBuffer(); 
+        String finalstring = sb.toString();
+        
+        System.out.println(finalstring);
+        
+               
+    }
+    
+    
+    
     public void loadFromJSON() throws IOException, ParseException{
         URL url = getClass().getResource("pannes.json");
         File file = new File(url.getPath());
@@ -83,7 +125,6 @@ public class CatalogueDePannes extends AbstractTableModel{
         JSONObject obj = (JSONObject) parser.parse(new FileReader(file));
         
         JSONArray pannesJSON = (JSONArray) obj.get("pannes");
-        System.out.println(pannesJSON);
 
         for(Object panne : pannesJSON) {
             JSONObject panneJSON = (JSONObject) panne;
