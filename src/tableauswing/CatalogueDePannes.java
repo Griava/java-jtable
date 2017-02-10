@@ -92,10 +92,19 @@ public class CatalogueDePannes extends AbstractTableModel{
         Document document = db.newDocument();
         
         
-        Element e  = document.createElement("pannes");
+        Element root  = document.createElement("pannes");
                
-        document.appendChild(e);
+        document.appendChild(root);
         
+        // ICI on crée un élément par panne
+        // du ArrayList de pannes :
+        
+        Element e1  = document.createElement("panne");
+        e1.setAttribute("id", "456");
+        e1.setTextContent("coincoin");
+        
+        root.appendChild(e1); 
+       
         
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer();
