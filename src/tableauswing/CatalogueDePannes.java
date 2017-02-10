@@ -103,6 +103,8 @@ public class CatalogueDePannes extends AbstractTableModel{
         e1.setAttribute("id", "456");
         e1.setTextContent("coincoin");
         
+        // e1.cloneNode(true)
+        
         root.appendChild(e1); 
        
         
