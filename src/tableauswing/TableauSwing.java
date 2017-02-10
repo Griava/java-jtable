@@ -7,15 +7,13 @@ package tableauswing;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.TextField;
+import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -61,7 +59,12 @@ public class TableauSwing {
         
         JTextField idTextField = new JTextField("id");
         JTextField nomTextField = new JTextField("nom");
-        JButton bouton = new JButton("+");
+        
+        JButton bouton = new JButton(new AbstractAction("+") {
+            public void actionPerformed(ActionEvent e) {
+                sourceDonneesPannes.add(new Long(idTextField.getText()), nomTextField.getText());
+            }
+        });
         
         // Mettre les champs dans le container
         

@@ -95,6 +95,11 @@ public class CatalogueDePannes extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    
+    public void add(long id, String nom){
+        pannes.add(new Panne(id, nom));
+        fireTableDataChanged();
+    }
 
     public int getRowCount() {
         return pannes.size();
